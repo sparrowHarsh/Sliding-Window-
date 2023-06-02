@@ -1,0 +1,46 @@
+/**
+*    Coded by :  Harsh vardhan 
+**/
+
+problem link: https://www.codingninjas.com/codestudio/problems/first-negative-in-every-window_759333?leftPanelTab=0
+submission link: https://www.codingninjas.com/codestudio/problems/first-negative-in-every-window_759333?leftPanelTab=1
+
+Code Logic:
+
+In this problem we need to find first negative element in a k size subarray. As in prev sum problem we were using map for window but here we need first negative
+element so we need some data structures to store all the negative elements. After k elements we need to delete first come number also, so queue datastructure will 
+be perfect for storing.
+
+Now when ele<0 we will put this in the queue, when window size is equal to k then we will push first element of queue in our answer array or if queue is empty then 0. 
+And if q.front() == arr[i], That is (least element of window which should be removed is first element of queue) then we will delete first element of queue.
+
+
+CODE:
+
+vector<int> firstNegative(vector<int> arr, int n, int k) {
+	
+	vector<int> ans;
+	int i=0,j=0;  // i=prev, j=next;
+
+	queue<int> q;  // to store index of val
+
+	while(j<n){
+		if(arr[j]<0){
+			q.push(arr[j]);
+		}
+
+		if(j-i+1==k){ 
+			int val=0;      
+			if(!q.empty()){
+				val=q.front();
+			}
+			ans.push_back(val);
+			if(val<0 && arr[i]==val){
+				q.pop();
+			}
+			i+=1;
+		}
+		j+=1;
+	}
+	return ans;
+}
