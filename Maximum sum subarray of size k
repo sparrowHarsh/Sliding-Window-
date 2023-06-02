@@ -1,0 +1,45 @@
+/**
+*    Coded by :  Harsh vardhan 
+**/
+
+/* problem link :- https://leetcode.com/problems/maximum-sum-of-distinct-subarrays-with-length-k/ */
+/* submission link :- https://leetcode.com/problems/maximum-sum-of-distinct-subarrays-with-length-k/submissions/961832578/  */
+
+Code Logic:
+
+In this probelm we have implemented sliding window with the help of hash map. we need to take k identical elements in sum, so we are taking each element's first occurance in map and when window size is equal
+to k then we are updating the sum and also we decrease the count of left side of window. (mp[arr[left]]-=1) As we need only k elements in subarray
+
+Code:
+long long maximumSubarraySum(vector<int>& nums, int k) {
+      map<int,int>mp;
+
+      int n=nums.size();
+      int i=0,j=0;
+      long long sum=0;
+      long long ans=0;
+      while(j<n){
+
+          if(mp.find(nums[j])==mp.end()){
+              sum+=nums[j];
+          }
+
+          mp[nums[j]]+=1;
+
+          if(mp.size() == k){
+              ans=max(ans,sum);
+          }
+
+          if(j-i+1>=k){
+              mp[nums[i]]-=1;
+              if(mp[nums[i]]<1){
+                  sum-=nums[i];
+                  mp.erase(nums[i]);
+              }
+              i+=1;
+          }
+          j+=1;
+      }
+
+      return ans;
+}
