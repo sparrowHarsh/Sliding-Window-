@@ -1,0 +1,32 @@
+/**
+*    Coded by :  Harsh vardhan 
+**/
+
+problem link: https://leetcode.com/problems/sliding-window-maximum/
+solution link: https://leetcode.com/problems/sliding-window-maximum/submissions/903660023/
+
+Code explanation:
+Here we need to find maximum element among all the subarray of window size k. To find this we need to store k elements in sorted order and once we get window size 
+k we will push max element among that window in our answer array. To do this we can use multiset. and when window size is equal to k then we will remove left 
+border element of window from multiset.
+
+code:
+#include <bits/stdc++.h> 
+vector<int> maxOfSubarray(vector<int> nums, int n, int k) 
+{
+	int i=0,j=0;
+	vector<int> ans;
+	multiset<int, greater<int>> mt;
+	while(j<n){
+		mt.insert(nums[j]);
+
+		if(j-i+1==k){
+			ans.push_back(*mt.begin());
+			auto it= mt.find(nums[i]);
+			mt.erase(it);
+			i+=1;
+		}
+		j+=1;
+	}
+	return ans;
+}
