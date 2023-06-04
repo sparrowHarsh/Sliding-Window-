@@ -1,0 +1,37 @@
+/**
+*    Coded by :  Harsh vardhan 
+**/
+
+problem:- https://practice.geeksforgeeks.org/problems/longest-sub-array-with-sum-k0809/1
+code link:- https://practice.geeksforgeeks.org/problems/longest-sub-array-with-sum-k0809/1 
+
+Code:
+int lenOfLongSubarr(int a[],  int n, int k) 
+  {
+      int i=0,j=0;
+      map<ll,int> mp;
+      ll sum=0;
+      int ans=0;
+      while(j<n){
+          sum+=a[j];
+
+          if(mp.find(sum) == mp.end()){
+              mp[sum]=j;
+          }
+
+          int prev= sum-k;
+
+          // check if sum exists or not
+          if(mp.find(prev)!=mp.end()){
+              ans=max(ans, j-mp[prev]);
+          }
+
+
+          if(sum==k){
+              ans=max(ans, j-i+1);
+          }
+
+          j+=1;
+      }
+      return ans;
+  } 
