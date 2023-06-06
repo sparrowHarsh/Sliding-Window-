@@ -1,0 +1,44 @@
+/**
+*    Coded by :  Harsh vardhan 
+**/
+
+
+Problem Link: https://leetcode.com/problems/longest-substring-without-repeating-characters/description/
+Code Link: https://leetcode.com/problems/longest-substring-without-repeating-characters/submissions/964158355/
+
+In this problem we need to take unique characters count. So for this we can maintain set and if any character is already present in set then 
+we will delete all the characters from set till that occurance.
+
+
+We will use simple sliding window approach here. We will take left(i) and right(j). we will insert s[j] in set.  but if s[j] is already present is set 
+then we will delete elements from i until count(s[j]) becomes 0. Then again we will insert s[j] at each step we will count j-i+1 and store maximum of all 
+in ans variable
+
+
+Code:
+class Solution {
+public:
+    int lengthOfLongestSubstring(string s) {
+        int i=0,j=0,n=s.size(),ans=0;
+        // if we find any repeating character delete element till that from set
+
+        set<char> st;
+        while(j<n){
+            if(st.count(s[j])<1){
+                ans=max(ans,j-i+1);
+            }else{
+                while(s[i]!=s[j]){
+                    st.erase(s[i]);
+                    i+=1;
+                }
+                st.erase(s[i]);
+                i+=1;
+                ans=max(ans,j-i+1);
+            }
+            st.insert(s[j]);
+            j+=1;
+        }
+        return ans;
+    }
+};
+
