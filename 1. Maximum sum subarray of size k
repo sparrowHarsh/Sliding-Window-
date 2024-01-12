@@ -7,8 +7,9 @@
 
 Code Logic:
 
-In this probelm we have implemented sliding window with the help of hash map. we need to take k identical elements in sum, so we are taking each element's first occurance in map and when window size is equal
-to k then we are updating the sum and also we decrease the count of left side of window. (mp[arr[left]]-=1) As we need only k elements in subarray
+In this probelm we have implemented sliding window with the help of hash map. we need to take k identical elements in sum, 
+so we are taking each element's first occurance in map and when window size is equal to k then we are updating the sum and 
+also we decrease the count of left side of window. (mp[arr[left]]-=1) As we need only k elements in subarray
 
 Code:
 long long maximumSubarraySum(vector<int>& nums, int k) {
